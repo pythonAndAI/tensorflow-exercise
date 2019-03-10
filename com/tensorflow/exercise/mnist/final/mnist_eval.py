@@ -5,6 +5,7 @@ import time
 from com.tensorflow.exercise.mnist.final import mnist_inference
 from com.tensorflow.exercise.mnist.final import mnist_train
 
+#准确率达到98.4%
 #每10秒加载一次最新的模型，并在测试数据上测试最新模型的正确率
 EVAL_INTERVAL_SIZE = 10
 

@@ -29,6 +29,7 @@ def train(mnist):
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
 
     cross_entropy_mean = tf.reduce_mean(cross_entropy)
+    #用loss的平均交叉熵加正则化
     loss = cross_entropy_mean + tf.add_n(tf.get_collection("losses"))
     learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE, global_step, mnist.train.num_examples / BATCH_SIZE, LEARNING_RATE_DECAY)
     train_steps = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)
