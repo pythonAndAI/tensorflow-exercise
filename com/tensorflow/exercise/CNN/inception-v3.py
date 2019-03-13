@@ -31,35 +31,36 @@ def inception_test(input):
 
             #Inception模型的第二条路径，这条计算路径上的结构本省也是一个Inception结构
             with tf.variable_scope("Branch_1"):
-                #实现一个过滤器边长为1，深度为320的卷积层.输出为[batch, 28, 28, 384]
+                #实现一个过滤器边长为1，深度为384的卷积层.输出为[batch, 28, 28, 384]
                 branch_1 = slim.conv2d(input, 384, [1, 1], scope="Conv2d_0a_1x1")
                 LOG.getlogger("branch_1_1").info(branch_1.shape)
                 #concat函数可以将多个矩阵拼接起来。第一个参数指定了拼接的维度，这里的3代表了矩阵是在深度这个维度上进行的拼接。输出为[batch, 28, 28, 768]
-                branch_1 = tf.concat(3, [slim.conv2d(branch_1, 384, [1, 3], scope="Conv2d_0b_1x3"), slim.conv2d(branch_1, 384, [3, 1], scope="Conv2d_0c_3x1")])
+                branch_1 = tf.concat([slim.conv2d(branch_1, 384, [1, 3], scope="Conv2d_0b_1x3"), slim.conv2d(branch_1, 384, [3, 1], scope="Conv2d_0c_3x1")], 3)
                 LOG.getlogger("branch_1_2").info(branch_1.shape)
 
             #Inception模型的第三条路径，这条计算路径上的结构本省也是一个Inception结构
             with tf.variable_scope("Branch_2"):
-                #实现一个过滤器边长为1，深度为320的卷积层.输出为[batch, 28, 28, 448]
+                #实现一个过滤器边长为1，深度为448的卷积层.输出为[batch, 28, 28, 448]
                 branch_2 = slim.conv2d(input, 448, [1, 1], scope="Conv2d_0a_1x1")
                 LOG.getlogger("branch_2_1").info(branch_2.shape)
                 #输出为[batch, 28, 28, 384]
                 branch_2 = slim.conv2d(branch_2, 384, [3, 3], scope="Conv2d_0b_3x3")
                 LOG.getlogger("branch_2_2").info(branch_2.shape)
                 #concat函数可以将多个矩阵拼接起来。第一个参数指定了拼接的维度，这里的3代表了矩阵是在深度这个维度上进行的拼接。输出为[batch, 28, 28, 768]
-                branch_2 = tf.concat(3, [slim.conv2d(branch_2, 384, [1, 3], scope="Conv2d_0c_1x3"), slim.conv2d(branch_2, 384, [3, 1], scope="Conv2d_0d_3x1")])
+                branch_2 = tf.concat([slim.conv2d(branch_2, 384, [1, 3], scope="Conv2d_0c_1x3"), slim.conv2d(branch_2, 384, [3, 1], scope="Conv2d_0d_3x1")], 3)
                 LOG.getlogger("branch_2_3").info(branch_2.shape)
 
             #Inception模型的第四条路径，这条计算路径上的结构本省也是一个Inception结构
             with tf.variable_scope("Branch_3"):
-                #实现一个过滤器边长为1，深度为320的卷积层.输出为[batch, 28, 28, 768]
+                #实现一个过滤器边长为1，深度为320的卷积层.输出为[batch, 28, 28, 1]
                 branch_3 = slim.avg_pool2d(input, [3, 3], scope="AvgPool_0a_3x3")
                 LOG.getlogger("branch_3_1").info(branch_3.shape)
+                #输出为[batch, 28, 28, 192]
                 branch_3 = slim.conv2d(branch_3, 192, [1, 1], scope="Conv2d_0b_1x1")
                 LOG.getlogger("branch_3_2").info(branch_3.shape)
 
-            #当前Inception模型的最后输出是由上面4个计算结果拼接得到的
-            net = tf.concat(3, [branch_0, branch_1, branch_2, branch_3])
+            #当前Inception模型的最后输出是由上面4个计算结果拼接得到的,输出为[batch, 28, 28, 2048]
+            net = tf.concat([branch_0, branch_1, branch_2, branch_3], 3)
             LOG.getlogger("final").info(net.shape)
 
     return net
@@ -71,3 +72,4 @@ if __name__ == "__main__":
     with tf.Session() as sess:
         tf.global_variables_initializer().run()
         inception_test(input)
+

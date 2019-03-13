@@ -81,3 +81,8 @@ http://image-net.org/challenges/LSVRC/2012/。ImageNet图像分类数据集上�
 9.2 在上面我们提到了一个卷积层可以使用边长为1、3、5的过滤器，那么如何在这些边长中选呢？inception模型给出了一个方案，那就是同时使用所有不同尺寸的过滤器，然后再将得到的矩阵拼接起来。
 得到的结果矩阵的长和宽与输入一样，深度为红黄蓝三个矩阵深度的和。如上是inception模块的核心思想。
 9.3 Inception-v3模型总共有46层，由11个inception模块组成，如Inception-v3.png中方框标注出来的结构就是一个Inception模块。在Inception-v3模块中有96个卷积层。可以用Tensorflow-Slim工具来简洁地实现一个卷积层。
+
+10.迁移学习
+10.1 迁移学习：就是将一个问题上训练好的模型通过简单的调整使其适用于一个新的问题
+10.2 实例的花卉数据集下载地址：http://download.tensorflow.org/example_images/flower_photos.tgz
+10.3 训练后的inception模型下载地址:http://download.tensorflow.org/models/inception_v3_2016_08_28.tar.gz
