@@ -39,7 +39,7 @@ def get_tune_variables():
             variables_to_restore.append(var)
     return variables_to_restore
 
-#获取所有需要从谷歌训练好的模型中加载的参数
+#获取所有需要训练的变量列表
 def get_trainable_variables():
     scopes = [scope.strip() for scope in TRAINABLE_SCOPES.split(",")]
 
