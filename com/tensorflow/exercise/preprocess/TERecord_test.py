@@ -50,6 +50,7 @@ def write_TFRecord():
     write = tf.python_io.TFRecordWriter(FILENAME)
     for i in range(num_example):
         image_raw = images[i].tostring()
+        print(image_raw)
         #将一个样例转化为Example Protocol Buffer，并将所有的信息写入这个数据结构
         #注意features=tf.train.Features(feature这块的单词书写，一个字母都不能错
         example = tf.train.Example(
@@ -93,12 +94,11 @@ def read_TFRercod():
     #启动多线程处理输入数据
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
-
     #每次运行可以读取TFRecord文件中的一个样例
     # for i in range(10):
     LOG.getlogger("read").info(sess.run([image, pixels, labels]))
     pass
 
 if __name__ == "__main__":
-    write_TFRecord()
+    # write_TFRecord()
     read_TFRercod()

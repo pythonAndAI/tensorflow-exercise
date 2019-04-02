@@ -27,9 +27,10 @@ def get_pool(conv, filter_size, filter_step, padding="SAME"):
     pool = tf.nn.max_pool(conv, ksize=[1, filter_size, filter_size, 1], strides=[1, filter_step, filter_step, 1], padding=padding)
     return pool
 
-def drawing(num):
-    plt.imshow(num)
-    plt.show()
+def drawing(num, isOK=True):
+    if isOK:
+        plt.imshow(num)
+        plt.show()
 
 if __name__ == "__main__":
     mnist = input_data.read_data_sets("E:\\Alls\\软件\\tensorflow-mnist", one_hot=True)
