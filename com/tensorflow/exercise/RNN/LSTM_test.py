@@ -20,6 +20,7 @@ if __name__ == "__main__":
 
         #每一步处理时间序列中的一个时刻。将当前输入current_input(结构中的Xt)和前一时刻状态state(Ht-1和Ct-1)传入定义的LSTM结构可以得到当前LSTM的输出lstm_output(Ht)和更新后状态state
         #(Ht和Ct)。lstm_output用于输出给其他层，state用于输出给下一时刻，他们在dropout等方面可以有不同的处理方式。
+        #处理每一个时刻的前向传播算结果。
         lstm_output, state = lstm("current_input", state)
         #将当前时刻LSTM结构的输出传入一个全连接层得到最后的输出。
         final_output = fully_connected(lstm_output)
