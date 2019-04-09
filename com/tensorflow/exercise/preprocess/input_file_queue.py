@@ -1,7 +1,7 @@
 import tensorflow as tf
 from com.tensorflow.exercise.preprocess import image_size as basis_code
 import os
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 '''
 输入文件队列
 1.虽然一个TFRecord文件中可以存储多个训练样例。但是当训练数据量较大时，可以将数据分成多个TFRecord文件来提高处理效率。
@@ -37,7 +37,7 @@ def write_tfrecord(decode_path, write_path):
         for j in range(instance_per_shard):
             if i == 1:
                 j = j + 3
-            LOG.getlogger("write img" + str(j)).info(img_value[j])
+            Log_Util.getlogger("write img" + str(j)).info(img_value[j])
             img_raw = img_value[j].tostring()
             example = tf.train.Example(features=tf.train.Features(feature={
                 "labels": _int64_feature(j),
@@ -69,13 +69,13 @@ def read_tfrecord(filepath):
     with tf.Session() as sess:
         #虽然在本段程序中没有声明任何变量，但使用tf.train.match_filenames_once函数时需要初始化一些变量
         tf.local_variables_initializer().run()
-        LOG.getlogger("file names").info(sess.run(files))
+        Log_Util.getlogger("file names").info(sess.run(files))
         #声明tf.train.Coordinator类来协同不同线程，并启动线程
         coord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
         for i in range(6):
-            LOG.getlogger("read img data").info(sess.run(image))
-            LOG.getlogger("read labels").info(sess.run(labels))
+            Log_Util.getlogger("read img data").info(sess.run(image))
+            Log_Util.getlogger("read labels").info(sess.run(labels))
 
         coord.request_stop()
         coord.join(threads)

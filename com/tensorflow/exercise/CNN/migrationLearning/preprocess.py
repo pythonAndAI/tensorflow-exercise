@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import os.path
 import glob
-# from com.tensorflow.exercise.logging import LOG
+# from com.utils import Log_Util
 
 #原始输入数据的目录，这个目录底下有5个子目录，每个子目录底下保存属于该类别的所有图片
 INPUT_PATH = "E:\\Alls\\software\\flower_photo\\flower_photos"
@@ -23,7 +23,7 @@ TEST_PERCENTAGE = 10
 def create_image_lists(sess=None, testing_percentage=None, validation_percentage=None):
     #获取一个元组，第一位是文件夹路径，第二位是一个list集合，里面是文件夹底下所有图片的名称
     # sub_dirs = [x[0] for x in os.walk(INPUT_PATH)]
-    # LOG.getlogger("sub_dirs").info(sub_dirs)
+    # Log_Util.getlogger("sub_dirs").info(sub_dirs)
 
     #初始化各个数据集
     training_images = []
@@ -39,11 +39,11 @@ def create_image_lists(sess=None, testing_percentage=None, validation_percentage
         #获取一个子目录中所有的图片文件
         # extensions = ['jpg', 'jpeg', 'JPG', 'JPEG']
         file_list = []
-        # LOG.getlogger("sub_dir").info(sub_dir)
+        # Log_Util.getlogger("sub_dir").info(sub_dir)
         #得到文件夹名称
         dir_name = os.path.basename(sub_dir)
         # for extension in extensions:
-        # LOG.getlogger("extension").info(extension)
+        # Log_Util.getlogger("extension").info(extension)
         #拼接路径。比如：E:\Alls\software\flower_photo\flower_photos\daisy\.jpg
         file_glob = os.path.join(INPUT_PATH, dir_name, '*.jpg')
         #获取file_glob路径底下所有的图片的文件名。并赋给file_list
@@ -53,7 +53,7 @@ def create_image_lists(sess=None, testing_percentage=None, validation_percentage
 
         #处理图片数据
         for file_name in file_list:
-            # LOG.getlogger("current_label").info(current_label)
+            # Log_Util.getlogger("current_label").info(current_label)
             #读取并解析图片，将图片转化为299*299以便inception-v3模型来处理
             #b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x01\x00H\x00H\x00\x00\xff\xe2\x0cXICC_PROFILE\x00\x01\x01\x00\x00\x0cH
             image_raw_data = tf.gfile.FastGFile(file_name, 'rb').read()
@@ -92,7 +92,7 @@ def main():
     with tf.Session() as sess:
         processed_data = create_image_lists(sess, VALIDATION_PERCENTAGE, TEST_PERCENTAGE)
         #通过numpy格式保存后处理的数据
-        # LOG.getlogger("output_data").info(processed_data)
+        # Log_Util.getlogger("output_data").info(processed_data)
         np.save(OUTPUT_FILE, processed_data[0])
         np.save(OUTPUT_FILE1, processed_data[1])
         np.save(OUTPUT_FILE2, processed_data[2])

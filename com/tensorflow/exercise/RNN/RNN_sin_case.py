@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from matplotlib import pyplot as plt
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 
 #利用循环神经网络实现对函数sinx取值的预测
 
@@ -78,16 +78,16 @@ def run_eval(sess, test_x, test_y):
         p, l = sess.run([prediction, y])
         predictions.append(p)
         labels.append(l)
-    LOG.getlogger("labels1").info(labels)
-    LOG.getlogger("predictions1").info(predictions)
+    Log_Util.getlogger("labels1").info(labels)
+    Log_Util.getlogger("predictions1").info(predictions)
     #计算rmse作为评估指标
     predictions = np.array(predictions).squeeze()
     labels = np.array(labels).squeeze()
     rmse = np.sqrt(((predictions - labels) ** 2).mean(axis=0))
     print("Mean Square Error is: %f" % rmse )
 
-    LOG.getlogger("labels2").info(labels)
-    LOG.getlogger("predictions2").info(predictions)
+    Log_Util.getlogger("labels2").info(labels)
+    Log_Util.getlogger("predictions2").info(predictions)
 
     #对预测的sin函数曲线进行绘图
     plt.figure()
@@ -100,15 +100,15 @@ def run_eval(sess, test_x, test_y):
 #numpy.linspace函数可以创建一个等差序列的数组，它常用的参数有三个参数，第一个参数表示起始值，第二个参数表示终止值，第三个参数表示数列的长度。例如,linespace(1,10,10)
 #产生的数组是array([1,2,3,4,5,6,7,8,9,10])
 test_start = (TRAINING_EXAMPLES + TIMESTEPS) * SAMPLE_GAP
-LOG.getlogger("test start").info(test_start)
+Log_Util.getlogger("test start").info(test_start)
 test_end = test_start + (TESTING_EXAMPLES + TIMESTEPS) * SAMPLE_GAP
-LOG.getlogger("test end").info(test_end)
+Log_Util.getlogger("test end").info(test_end)
 train_X, train_y = generate_data(np.sin(np.linspace(0, test_start, TRAINING_EXAMPLES + TIMESTEPS, dtype=np.float32)))
-LOG.getlogger("train X").info(train_X)
-LOG.getlogger("train y").info(train_y)
+Log_Util.getlogger("train X").info(train_X)
+Log_Util.getlogger("train y").info(train_y)
 test_X, test_y = generate_data(np.sin(np.linspace(test_start, test_end, TESTING_EXAMPLES + TIMESTEPS, dtype=np.float32)))
-LOG.getlogger("test X").info(test_X)
-LOG.getlogger("test y").info(test_y)
+Log_Util.getlogger("test X").info(test_X)
+Log_Util.getlogger("test y").info(test_y)
 
 with tf.Session() as sess:
     #训练模型

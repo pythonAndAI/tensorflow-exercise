@@ -1,11 +1,11 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 import matplotlib.pyplot as plt
 
 def getLogger(name):
-    return LOG.getlogger(name)
+    return Log_Util.getlogger(name)
 
 def get_weigths(name, filter_size, current_depth, output_depth, regularizer=None):
     wegiths = tf.get_variable(name=name, shape=[filter_size, filter_size, current_depth, output_depth], initializer=tf.truncated_normal_initializer(stddev=0.1))
@@ -57,26 +57,26 @@ if __name__ == "__main__":
         # result_conv = sess.run(conv2[0])
         # for i in range(27):
         #     drawing(result_conv[i])
-        # LOG.getlogger("weigth shape").info(weigth_conv1.shape)
-        # LOG.getlogger("weigth one").info(len(sess.run(weigth_conv1)))
-        # LOG.getlogger("weigth two").info(len(sess.run(weigth_conv1[0])))
-        # LOG.getlogger("weigth three").info(len(sess.run(weigth_conv1[0][0])))
-        # LOG.getlogger("weigth five").info(len(sess.run(weigth_conv1[0][0][0])))
+        # Log_Util.getlogger("weigth shape").info(weigth_conv1.shape)
+        # Log_Util.getlogger("weigth one").info(len(sess.run(weigth_conv1)))
+        # Log_Util.getlogger("weigth two").info(len(sess.run(weigth_conv1[0])))
+        # Log_Util.getlogger("weigth three").info(len(sess.run(weigth_conv1[0][0])))
+        # Log_Util.getlogger("weigth five").info(len(sess.run(weigth_conv1[0][0][0])))
         #
-        # LOG.getlogger("conv2 shape").info(conv2.shape)
-        # LOG.getlogger("conv2 one").info(len(sess.run(conv2)))
-        # LOG.getlogger("conv2 two").info(len(sess.run(conv2[0])))
-        # LOG.getlogger("conv2 three").info(len(sess.run(conv2[0][0])))
-        # LOG.getlogger("conv2 five").info(len(sess.run(conv2[0][0][0])))
+        # Log_Util.getlogger("conv2 shape").info(conv2.shape)
+        # Log_Util.getlogger("conv2 one").info(len(sess.run(conv2)))
+        # Log_Util.getlogger("conv2 two").info(len(sess.run(conv2[0])))
+        # Log_Util.getlogger("conv2 three").info(len(sess.run(conv2[0][0])))
+        # Log_Util.getlogger("conv2 five").info(len(sess.run(conv2[0][0][0])))
         #
-        # LOG.getlogger("pool shape").info(pool.shape)
-        # LOG.getlogger("pool one").info(len(sess.run(pool)))
-        # LOG.getlogger("pool two").info(len(sess.run(pool[0])))
-        # LOG.getlogger("pool three").info(len(sess.run(pool[0][0])))
-        # LOG.getlogger("pool five").info(len(sess.run(pool[0][0][0])))
-        LOG.getlogger("pool shape2").info(pool_shape)
-        LOG.getlogger("pool nodes").info(nodes)
-        LOG.getlogger("pool reshape").info(reshape)
+        # Log_Util.getlogger("pool shape").info(pool.shape)
+        # Log_Util.getlogger("pool one").info(len(sess.run(pool)))
+        # Log_Util.getlogger("pool two").info(len(sess.run(pool[0])))
+        # Log_Util.getlogger("pool three").info(len(sess.run(pool[0][0])))
+        # Log_Util.getlogger("pool five").info(len(sess.run(pool[0][0][0])))
+        Log_Util.getlogger("pool shape2").info(pool_shape)
+        Log_Util.getlogger("pool nodes").info(nodes)
+        Log_Util.getlogger("pool reshape").info(reshape)
         # logger.info(len(sess.run(conv2[0])))
         # logger.info(sess.run(pool))
         # logger.info(sess.run(pool[0][0]))

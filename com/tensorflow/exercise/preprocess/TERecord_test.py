@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 import os
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 
 '''
 在preprocess.py中我们是通过一个字典来存储图片信息，但是当数据来源更加复杂，每一个样例中的信息更加丰富之后，这种方式就很难有效地记录输入数据的信息了。
@@ -96,7 +96,7 @@ def read_TFRercod():
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
     #每次运行可以读取TFRecord文件中的一个样例
     # for i in range(10):
-    LOG.getlogger("read").info(sess.run([image, pixels, labels]))
+    Log_Util.getlogger("read").info(sess.run([image, pixels, labels]))
     pass
 
 if __name__ == "__main__":

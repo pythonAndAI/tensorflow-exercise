@@ -1,7 +1,7 @@
 import tensorflow as tf
 import os
 from com.tensorflow.exercise.preprocess import image_size as basis_code
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 '''
 组合训练数据(batching)
 将图片进行预处理之后就可以得到提供给神经网络输入层的训练数据了，在前面介绍过，将多个输入样例组织成一个batch可以提高模型训练的效率。所以在得到单个样例的预处理结果之后，
@@ -50,8 +50,8 @@ def batch_test(filepath):
         coord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
         # for i in range(6):
-        LOG.getlogger("img batch").info(sess.run(img_batch))
-        LOG.getlogger("img labels").info(sess.run(label_batch))
+        Log_Util.getlogger("img batch").info(sess.run(img_batch))
+        Log_Util.getlogger("img labels").info(sess.run(label_batch))
         coord.request_stop()
         coord.join(threads)
         print("all threads stop!")
@@ -71,8 +71,8 @@ def shuffle_batch_test(filepath):
         coord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
         # for i in range(6):
-        LOG.getlogger("img batch").info(sess.run(img_batch))
-        LOG.getlogger("img labels").info(sess.run(label_batch))
+        Log_Util.getlogger("img batch").info(sess.run(img_batch))
+        Log_Util.getlogger("img labels").info(sess.run(label_batch))
         coord.request_stop()
         coord.join(threads)
         print("all threads stop!")

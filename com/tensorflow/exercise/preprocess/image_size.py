@@ -1,6 +1,6 @@
 import tensorflow as tf
 from com.tensorflow.exercise.CNN.cnnMnist import mnist_basis as basis
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 import os
 import re
 
@@ -85,7 +85,7 @@ def method_one(filepath):
             basis.drawing(sess.run(img_data))
             #获取编码路径
             endoce_path = get_encode_path(filepath, i)
-            LOG.getlogger("编码路径为:").info(endoce_path)
+            Log_Util.getlogger("编码路径为:").info(endoce_path)
             #编码到新的图片中
             basis_encode(img_data, endoce_path)
 
@@ -118,7 +118,7 @@ def method_three(filepath):
 
 if __name__ == "__main__":
     filepath = get_andclean_image()
-    LOG.getlogger("原始图片路径为:").info(filepath)
+    Log_Util.getlogger("原始图片路径为:").info(filepath)
     # method_one(filepath)
     # method_two(filepath)
     method_three(filepath)

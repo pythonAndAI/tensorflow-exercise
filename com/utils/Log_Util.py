@@ -1,9 +1,10 @@
 import logging
 import os
 import time
+from com.utils import File_Util
 
 class logger:
-    def __init__(self, name, consoleLog, errorLog, allLog):
+    def __init__(self, name, consoleLog, errorLog, allLog, is_rm):
         # 创建一个logger
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.DEBUG)
@@ -18,7 +19,9 @@ class logger:
         if allLog:
             # 设置所有日志存放路径
             #all_log_path = os.path.join(os.path.dirname(os.getcwd()), 'logging/All_Logs/')
-            all_log_path = os.path.join("E:\Alls\code\python\/tensorflow-exercise\com\/tensorflow\exercise\/", 'logging/All_Logs/')
+            all_log_path = File_Util.get_path(os.path.join("E:\Alls\code\python\/tensorflow-exercise\com\/", 'utils/All_Logs/'))
+            if is_rm:
+                File_Util.remove_all(all_log_path)
             # 设置日志文件名
             all_log_name = all_log_path + rq + '.log'
             # 创建handler
@@ -33,7 +36,9 @@ class logger:
 
         if errorLog:
             #设置错误日志的存放路径
-            error_log_path = os.path.join(os.path.dirname(os.getcwd()), 'logging/Error_Logs/')
+            error_log_path = File_Util.get_path(os.path.join("E:\Alls\code\python\/tensorflow-exercise\com\/", 'utils/Error_Logs/'))
+            if is_rm:
+                File_Util.remove_all(error_log_path)
             # 设置日志文件名
             error_log_name = error_log_path + rq + '.log'
             # 创建handler
@@ -59,7 +64,7 @@ class logger:
     def getlog(self):
         return self.logger
 
-def getlogger(name, consoleLog=False, errorLog=False, allLog=True):
-    log = logger(name, consoleLog=consoleLog, errorLog=errorLog, allLog=allLog).getlog()
+def getlogger(name, consoleLog=False, errorLog=False, allLog=True, is_rm=False):
+    log = logger(name, consoleLog=consoleLog, errorLog=errorLog, allLog=allLog, is_rm=is_rm).getlog()
     return log
 

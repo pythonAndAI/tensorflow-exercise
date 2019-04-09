@@ -3,7 +3,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 from com.tensorflow.exercise.CNN.cnnMnist import mnist_inference
 import numpy as np
 import os
-from com.tensorflow.exercise.logging import LOG
+from com.utils import Log_Util
 
 #配置神经网络的参数
 BATCH_SIZE = 100
@@ -54,8 +54,8 @@ def train(mnist):
             _, loss_value, step = sess.run([train_op, loss, global_step], feed_dict={x: input_tensor, y_: ys})
             if i % 1000 == 0:
                 # print("After %d training step(s),loss on  training " "batch is %g ." % (step, loss_value))
-                LOG.getlogger("loss").info(loss_value)
-                LOG.getlogger("step").info(step)
+                Log_Util.getlogger("loss").info(loss_value)
+                Log_Util.getlogger("step").info(step)
                 saver.save(sess, os.path.join(MODEL_SAVE_PATH, MODEL_NAME), global_step=global_step)
 
 def main(argv=None):
