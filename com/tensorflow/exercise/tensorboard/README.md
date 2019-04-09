@@ -13,3 +13,5 @@ Tensorborad--> 是Tensorflow的可视化工具，它可以通过Tensorflow程序
 
 2.为了更好地组织可视化效果图上的节点。Tensorboard支持通过TensorFlow命名空间来整理可视化效果图上的节点。在Tensorboard的默认视图中，TensorFlow计算图中同一个命名空间下的所有节点会被缩略成一个节点，
 只有顶层命名空间中的节点才会被显示在Tensorboard可视化效果图上。Tensorboard通过tf.name_scope函数来管理命名空间。tf.name_scope函数不会影响tf.get_variable()函数定义的变量的命名空间。参考案例TB_scope.py
+
+参考：https://www.cnblogs.com/bestExpert/p/10678844.html
