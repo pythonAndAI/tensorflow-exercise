@@ -1,6 +1,7 @@
 import tensorflow as tf
 from com.utils import Cmd_Util
 '''
+命名空间与TensorBoard图上节点
 讲解了tf.variable_scope和tf.name_scope的区别。
 相同点：都有管理命名空间的功能。
 不同点：tf.variable_scope管理了tf.get_variable函数定义的变量的命名空间。而tf.name_scope对tf.get_variablle没有影响。

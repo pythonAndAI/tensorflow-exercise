@@ -38,10 +38,15 @@ def remove_all(path, is_create=True):
     else:
         print(path, "does not exist!")
 
+#删除指定文件
+def remove_designation_file(path):
+    if os.path.exists(path) and os.path.isfile(path):
+        os.remove(path)
+    else:
+        print(path, "does not exist or is not a file")
+
 #获取路径，不存在创建
 def get_path(path):
-    if os.path.exists(path):
-        return path
-    else:
+    if not os.path.exists(path):
         os.mkdir(path)
-        return path
+    return path

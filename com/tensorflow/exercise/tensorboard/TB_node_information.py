@@ -11,6 +11,7 @@ LEARNING_RATE_DECAY = 0.99
 MOVING_AVERAGE_DECAY = 0.99
 TRAINING_STEPS = 30000
 
+#节点信息。展示运行时消耗的空间和时间
 #基于TB_mnist.py的结构，展示TensorFlow计算图上每个节点的基本信息以及运行时消耗的时间和空间。
 def train(mnist, path):
     #将处理输入数据的计算都放在名字为“input”的命名空间下。
