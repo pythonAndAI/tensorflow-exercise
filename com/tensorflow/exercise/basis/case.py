@@ -20,7 +20,7 @@ def case():
     #定义损失函数和反向传播
     y = tf.sigmoid(y)
     cross_entropy = - tf.reduce_mean(y_ * tf.log(tf.clip_by_value(y, 1e-10, 1.0)) + (1 - y) * tf.log(tf.clip_by_value(1 - y, 1e-10, 1.0)))
-    train_step = tf.train.AdamOptimizer().minimize(cross_entropy)
+    train_step = tf.train.AdamOptimizer(0.001).minimize(cross_entropy)
 
     #通过随机数生成一个模拟数据集
     dataset_size = 128
