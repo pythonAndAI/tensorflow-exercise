@@ -29,7 +29,7 @@ if __name__ == "__main__":
         #更新v1的滑动平均值，衰减率计算公式为min{decay, (1+num_updates)/(10+num_updates)}=min{0.99, (1+step)/(10+step)=0.1}=0.1
         #v1的滑动平均会被更新为hadow_variable = decay * shadow_variable + (1 - decay) * variable=0.1 * 0 + 0.9 * 5 = 4.5
         #下面的计算同理
-        # sess.run(maintain_averages_op)
+        sess.run(maintain_averages_op)
         print(sess.run([v1, ema.average(v1)]))
 
         # 更新变量step的值为10000
@@ -37,10 +37,11 @@ if __name__ == "__main__":
         # 更新变量v1的值为10
         sess.run(tf.assign(v1, 10))
 
+        # 更新v1的滑动平均值，衰减率计算公式为min{decay, (1+num_updates)/(10+num_updates)}=min{0.99, (1+step)/(10+step)=0.999}=0.99
         # v1的滑动平均会被更新为0.99 * 4.5 + 0.01 * 10 = 4.555
-        # sess.run(maintain_averages_op)
+        sess.run(maintain_averages_op)
         print(sess.run([v1, ema.average(v1)]))
 
         #再次更新滑动平均值，得到更新后的值为0.99*4.555+0.01*10=4.60945
-        # sess.run(maintain_averages_op)
+        sess.run(maintain_averages_op)
         print(sess.run([v1, ema.average(v1)]))

@@ -82,7 +82,7 @@ def main(argv=None):
         #定义输入并得到每一轮迭代需要运行的操作
         x = tf.placeholder(tf.float32, [None, mnist_inference.INPUT_NODES], name='x-input')
         y_ = tf.placeholder(tf.float32, [None, mnist_inference.OUTPUT_NODES], name='y-input')
-        global_step, loss, train_op, sync_replicas_hook = build_model(x, y_, is_chief)
+        global_step, loss, train_op, sync_replicas_hook = build_model(x, y_, n_workers, is_chief)
 
         #把处理同步更新的hook也加进来。
         hooks = [sync_replicas_hook, tf.train.StopAtStepHook(last_step=TRAINING_STEPS)]
