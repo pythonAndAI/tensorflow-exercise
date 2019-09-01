@@ -68,7 +68,7 @@ def train(mnist):
 
     #定义损失函数，此分类问题只有一个正确结果，所以可以使用sparse_softmax_cross_entropy_with_logits来加速交叉熵的计算。
     #第一个参数为前向传播结果，第二个参数为正确答案。因为标准答案是一个长度为10的一维数组，而该函数需要提供一个正确答案的数字，
-    #所以需要使用tf.argmax函数来得到正确答案对应的类别编号
+    #所以需要使用tf.argmax函数来得到正确答案对应的类别编号。y-->[100, 10], y_--->[100, 10], tf.argmax(y_, 1)--->[1, 100]
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
     #计算在当前batch中所有样例的交叉熵平均值
     cross_entropy_mean = tf.reduce_mean(cross_entropy)
@@ -97,6 +97,9 @@ def train(mnist):
     #的每一维是否相等，如果相等返回True，否则返回False。
     #其中tf.argmax(average_y,1)获取每一维数字中的最大值的下标，返回一个全是下标的一维数组。tf.equal对比两个张量每一维数字是否相等。相等返回True，不等返回False.
     #所以correct_prediction是一个里面全是True或False的一维数组。correct_prediction和accuracy两步中用到的函数详情可参考test.py的练习
+    #bb = tf.constant([[1, 0, 0, 0], [0, 0, 0, 1], [0, 1, 0, 0]], dtype=tf.float32, name="b")
+    #print(sess.run(tf.argmax(bb, 1)))
+    #[0 3 1]
     correct_prediction = tf.equal(tf.argmax(average_y,1), tf.argmax(y_, 1))
 
     #这个运算首先将一个布尔型的数值转换为实数型，然后计算平均值，这个平均值就是模型在这一组数据上的正确率
